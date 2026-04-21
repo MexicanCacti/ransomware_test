@@ -7,11 +7,13 @@ from cryptography.fernet import Fernet
 
 def decrypt_directory(root, key):
     for item in root.rglob("*"):
-        if item.is_file():
+        if item.is_file() and item.suffix == ".locked":
             try:
                 data = item.read_bytes()
                 decrypted = key.decrypt(data)
-                item.write_bytes(decrypted)
+                decrytpedFile = item.with_suffix("")
+                decrytpedFile.write_bytes(decrypted)
+                item.unlink()
                 print(f"Decrypted: {item}")
             except Exception as e:
                 print(f"Error on {item}: {e}")
